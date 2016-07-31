@@ -1,0 +1,25 @@
+a {
+  color: blue;
+  cursor: pointer;
+}
+
+.header {
+  text-align: center;
+}
+
+.tracker {
+  margin: 10px;
+
+  .pure-u-1-4 {
+    padding-left: 5px;
+  }
+
+  .subject-header {
+    margin-bottom: 10px;
+  }
+
+  .tweets {
+    height: 500px;
+    overflow: auto;
+  }
+}

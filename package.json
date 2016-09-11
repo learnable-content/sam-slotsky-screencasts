@@ -4,20 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "spec": "mocha './spec/**/*.spec.js*' --compilers js:babel-register --recursive",
     "start": "webpack-dev-server --progress --colors -w",
-    "lint": "eslint ./app/** --ext=js,jsx --fix"
+    "lint": "eslint ./app/** ./spec/** --ext=js,jsx --fix",
+    "test": "npm run lint && npm run spec"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-regenerator-runtime": "^6.5.0",
     "css-loader": "^0.23.1",
+    "immutable": "^3.8.1",
     "node-sass": "^3.7.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "redux-saga": "^0.11.1",
     "redux-thunk": "^2.1.0",
     "sass-loader": "^3.2.0",
+    "socket.io-client": "^1.4.8",
     "style-loader": "^0.13.1"
   },
   "devDependencies": {

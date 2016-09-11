@@ -1,3 +1,4 @@
+import { List } from 'immutable'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { track } from '../actions'
@@ -5,7 +6,7 @@ import Tracker from './Tracker'
 
 class App extends Component {
   static propTypes = {
-    subjects: PropTypes.object.isRequired,
+    subjects: PropTypes.instanceOf(List),
     trackSubject: PropTypes.func.isRequired
   }
 

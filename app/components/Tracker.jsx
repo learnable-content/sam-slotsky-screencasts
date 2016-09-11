@@ -1,13 +1,23 @@
 import React, { PropTypes, Component } from 'react'
-import Tweets from './Tweets'
-import * as actionCreators from '../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Tweets from './Tweets'
+import * as actionCreators from '../actions'
+
 export class Tracker extends Component {
   static propTypes = {
-    subject: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    subject: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      visibleCount: PropTypes.number.isRequired,
+      readTweets: PropTypes.arrayOf(PropTypes.shape()),
+      unreadTweets: PropTypes.arrayOf(PropTypes.shape())
+    }).isRequired,
+    actions: PropTypes.shape({
+      readAll: PropTypes.func.isRequired,
+      untrack: PropTypes.func.isRequired,
+      viewMore: PropTypes.func.isRequired
+    }).isRequired
   }
 
   readAll() {
@@ -29,16 +39,16 @@ export class Tracker extends Component {
   unreadTweets() {
     const { unreadTweets } = this.props.subject
     return (
-      <a className="pure-button pure-button-primary" onClick={() => this.readAll()}>
+      <button className="pure-button pure-button-primary" onClick={() => this.readAll()}>
         {`${unreadTweets.length} unread tweets (read more)`}
-      </a>
+      </button>
     )
   }
 
   render() {
     const { name, readTweets, visibleCount } = this.props.subject
     const readMore = readTweets.length > visibleCount ? (
-      <a onClick={() => this.viewMore()}>Read More...</a>
+      <button onClick={() => this.viewMore()}>Read More...</button>
     ) : false
 
     return (
@@ -46,9 +56,9 @@ export class Tracker extends Component {
         <div className="subject-header">
           <h2>{name}</h2>
           {this.unreadTweets()}
-          <a className="pure-button pure-button-warning" onClick={() => this.ignore()}>
+          <button className="pure-button pure-button-warning" onClick={() => this.ignore()}>
             Untrack
-          </a>
+          </button>
         </div>
         <div className="tweets" ref={(node) => { this.scrollTop = node }}>
           <Tweets tweets={readTweets.slice(0, visibleCount)} />

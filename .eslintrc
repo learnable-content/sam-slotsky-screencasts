@@ -13,6 +13,7 @@
     "react/prefer-stateless-function": ["off"],
     "no-constant-condition": ["off"],
     "import/no-named-as-default": ["off"],
-    "react/no-unused-prop-types": [2, { skipShapeProps: true }]
+    "react/no-unused-prop-types": [2, { skipShapeProps: true }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }

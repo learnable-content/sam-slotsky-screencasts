@@ -5,7 +5,7 @@ import { take, call, put, fork, cancel, cancelled } from 'redux-saga/effects'
 import socket, { channel } from './socket'
 import * as actionTypes from './constants'
 
-function socketEmitter(name) {
+export function socketEmitter(name) {
   return eventChannel(emitter => {
     socket.emit('track', name)
     const newChannel = channel(name)
@@ -19,7 +19,7 @@ function socketEmitter(name) {
   })
 }
 
-function* listen(name) {
+export function* listen(name) {
   const chan = yield call(socketEmitter, name)
 
   try {

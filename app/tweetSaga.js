@@ -38,7 +38,7 @@ export function* listen(name) {
   }
 }
 
-function* subscribe(action) {
+export function* subscribe(action) {
   const listenTask = yield fork(listen, action.name)
   let subscribed = true
 
@@ -52,7 +52,7 @@ function* subscribe(action) {
 }
 
 function* track() {
-  yield* takeEvery(actionTypes.TRACK_SUBJECT, subscribe)
+  yield call(takeEvery, actionTypes.TRACK_SUBJECT, subscribe)
 }
 
 export default track

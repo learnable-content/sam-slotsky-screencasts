@@ -4,16 +4,20 @@ import { connect } from 'react-redux'
 import { track } from '../actions'
 import Tracker from './Tracker'
 
-class App extends Component {
+export class App extends Component {
   static propTypes = {
     subjects: PropTypes.instanceOf(List),
     trackSubject: PropTypes.func.isRequired
   }
 
+  state = {
+    input: ''
+  }
+
   handleSubmit(e) {
     e.preventDefault()
-    this.props.trackSubject(this.input.value)
-    this.input.value = null
+    this.props.trackSubject(this.state.input)
+    this.setState({ input: '' })
   }
 
   subjects() {
@@ -35,7 +39,11 @@ class App extends Component {
         <div className="header">
           <h1>Twitter Topic Watch</h1>
           <form className="pure-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <input type="text" ref={(node) => { this.input = node }} />
+            <input
+              type="text"
+              value={this.state.input}
+              onChange={(e) => this.setState({ input: e.target.value })}
+            />
             &nbsp;
             <button type="submit" className="pure-button pure-button-primary">Track!</button>
           </form>
